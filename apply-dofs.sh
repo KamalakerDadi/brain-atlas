@@ -52,8 +52,6 @@ apply() {
 
 apply atlas/labels/structures/*
 apply atlas/labels/tissues/*
-apply atlas/scaled/t1w/*
-apply atlas/scaled/t2w/*
 apply atlas/templates/t1w/*
 apply atlas/templates/t2w/*
 

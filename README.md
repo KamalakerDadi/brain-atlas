@@ -1,5 +1,14 @@
 # register Andreas' brain atlases to each other
 
+Sample output:
+
+![37, 40 and 44 weeks][brains]
+
+[brains]: sample.png
+
+The colour image is the three slices overlaid. More colour means more
+difference. 
+
 The atlases are held on
 
     /vol/dhcp-derived-data/volumetric-atlases/groupwise/output/dhcp-n275-t36_44-adaptive-sigma_1.00-nmi/atlas
@@ -57,7 +66,8 @@ $ find-dofs.sh
 # Move all brains to t40
 
 This will do all the brains with the transforms we found from the t2
-templates. This might or might not work, since the scales are different.
+templates. It doesn't transform the scales volumes since the size is
+different and the found dofs will not work. 
 
 ```
 $ ./apply-dofs.sh 
