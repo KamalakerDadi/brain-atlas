@@ -1,4 +1,4 @@
-# register Andreas' brain atlases to each other
+# Register brain atlases to a common time
 
 Sample output:
 
@@ -6,14 +6,15 @@ Sample output:
 
 [brains]: sample.png
 
-The colour image is the three slices overlaid. More colour means more
-difference. 
+The three mono slices are at 37, 40 and 44 weeks, all aligned to the 40
+week scan. The colour image is the three slices overlaid, so more colour
+means more difference.
 
 The atlases are held on
 
     /vol/dhcp-derived-data/volumetric-atlases/groupwise/output/dhcp-n275-t36_44-adaptive-sigma_1.00-nmi/atlas
 
-# Directory structure
+# Atlas structure
 
 ```
 labels
@@ -60,7 +61,7 @@ Pretty quick, ~7s typically. Add 10s if you want to invert the transform.
 Scans all the t2 templates and generates a det of dofs:
 
 ```
-$ find-dofs.sh
+$ ./find-dofs.sh
 ```
 
 # Move all brains to t40
