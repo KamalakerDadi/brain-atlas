@@ -56,6 +56,9 @@ $ find-dofs.sh
 
 # Move all brains to t40
 
+This will do all the brains with the transforms we found from the t2
+templates. This might or might not work, since the scales are different.
+
 ```
 $ ./apply-dofs.sh 
 ```
