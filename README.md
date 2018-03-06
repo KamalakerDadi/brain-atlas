@@ -14,6 +14,20 @@ The atlases are held on
 
     /vol/dhcp-derived-data/volumetric-atlases/groupwise/output/dhcp-n275-t36_44-adaptive-sigma_1.00-nmi/atlas
 
+# Remaining issues
+
+Some issues still need to be addressed:
+
+* we don't resample the `scaled` brains, since the scale there is different
+  and our dofs won't work
+
+* `transform-image` seems to change the image brightness, very strange ...
+  perhaps a problem with the `Fast cubic BSpline` interpolator we are using
+
+* the label images look OK, but the interpolator is obviously not correct for
+  this image type ... we should use an interpolator that collects votes over a 
+  stencil
+
 # Atlas structure
 
 ```
