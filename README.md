@@ -22,7 +22,7 @@ Some issues still need to be addressed:
   and our dofs won't work
 
 * `transform-image` seems to change the image brightness, very strange ...
-  perhaps a problem with the `Fast cubic BSpline` interpolator we are using
+  perhaps a problem with the `bspline` interpolator we are using
 
 * the label images look OK, but the interpolator is obviously not correct for
   this image type ... we should use an interpolator that collects votes over a 
