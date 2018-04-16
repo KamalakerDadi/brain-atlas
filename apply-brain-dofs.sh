@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # set -x
+set -e
 
 warp() {
 	local brain=$1
@@ -44,10 +45,7 @@ warp() {
 	local cmd="mirtk transform-image $brain $out $dofs \
 		-interp bspline -target atlas/templates/t2w/t40.00.nii.gz"
 	echo $cmd
-	$cmd || { 
-		echo transform-image failed
-		exit 1
-	}
+	$cmd 
 }
 
 while IFS='' read -r line || [[ -n "$line" ]]; do

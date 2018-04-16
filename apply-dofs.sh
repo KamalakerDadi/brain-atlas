@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 warp() {
 	local brain=$1
 	local out=$2
@@ -42,10 +44,7 @@ warp() {
 	fi
 
 	echo $cmd
-	$cmd || { 
-		echo transform-image failed
-		exit 1
-	}
+	$cmd 
 }
 
 apply() {

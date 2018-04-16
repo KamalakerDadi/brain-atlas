@@ -1,6 +1,10 @@
 #!/bin/bash
 
+set -e
+
 register() {
+	mode=$1
+	shift
 	first=$1
 	shift
 
@@ -18,14 +22,16 @@ register() {
 		echo "     and $first to $dof ..."
 		mkdir -p dofs
 		mirtk register \
-			-image $next -image $first -dofout dofs/$dof -v 0 || { 
-			echo register failed
-			exit 1
-		}
+			-image $next -image $first -dofout dofs/$dof \
+			-model $model \
+			-v 0 
 
 		first=$next
 	done
 }
 
-register atlas/templates/t2w/*
+templates=atlas/templates/t2w
+model=Rigid+Affine+SVFFD
+echo "registering $templates using $model"
+register $model $templates/*
 

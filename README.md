@@ -28,7 +28,7 @@ Some issues still need to be addressed:
   this image type ... we should use an interpolator that collects votes over a 
   stencil
 
-# Atlas structure
+# Atlas 
 
 ```
 labels
@@ -48,7 +48,7 @@ templates
         T2 images ... looks a big bigger and sharper than "scaled/t2w"
 ```
 
-# Register
+### Register
 
 Attempt registration with MIRTK, writing the transform to
 `t36-37.dof`. Register `templates/t2w`, since they look the best
@@ -58,9 +58,10 @@ visually. This will make a transform which will warp t36 to match t37.
 $ mirtk register -image t37.00.nii.gz -image t36.00.nii.gz -dofout t36-t37.dof
 ```
 
-Takes about 3m20 to generate fixed, affine and free-form transforms.
+Takes about 3m20 to generate fixed, affine and free-form transforms. Use
+`-model Rigid+Affine+SVFFD` for FFD with stationary velocity field. 
 
-# Apply transform
+### Apply transform
 
 Apply a computed transform with:
 
@@ -70,7 +71,7 @@ $ mirtk transform-image t36.00.nii.gz x.nii.gz -dofin t36-t37.dof -interp "Fast 
 
 Pretty quick, ~7s typically. Add 10s if you want to invert the transform. 
 
-# Register all brains
+# Register all atlas brains
 
 Scans all the t2 templates and generates a det of dofs:
 
@@ -78,13 +79,20 @@ Scans all the t2 templates and generates a det of dofs:
 $ ./find-dofs.sh
 ```
 
-# Move all brains to t40
+### Move all atlas brains to t40
 
-This will do all the brains with the transforms we found from the t2
+This will do all the atlas brains with the transforms we found from the t2
 templates. It doesn't transform the scales volumes since the size is
 different and the found dofs will not work. 
 
 ```
 $ ./apply-dofs.sh 
 ```
+
+# Brains
+
+Use `./get-brains.sh` to fetch a set of sample scans, `./find-brain-dofs.sh`
+to generate dofs to transform each one to the nearest atlas entry, and
+`./apply-brain-dofs.sh` to move them all to t40.
+
 

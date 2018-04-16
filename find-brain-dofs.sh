@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # set -x
+set -e
+
+model=Rigid+Affine+SVFFD
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
 	if [[ ! $line =~ parti*. ]]; then
@@ -28,10 +31,8 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 				-image atlas/templates/t2w/t$age.00.nii.gz \
 				-image $brain \
 				-dofout dofs/$code-t$age.dof \
-				-v 0 || { 
-				echo register failed
-				exit 1
-			}
+				-model $model \
+				-v 0 
 		fi
 	fi
 done < brains/participants.tsv 
