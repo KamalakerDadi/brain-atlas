@@ -4,6 +4,7 @@
 set -e
 
 model=Rigid+Affine+SVFFD
+out=dofs
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
 	if [[ ! $line =~ parti*. ]]; then
@@ -25,12 +26,12 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 		done
 
 		# register to atlas
-		if [ ! -f dofs/$code-t$age.dof ]; then 
+		if [ ! -f $out/$code-t$age.dof ]; then 
 			echo register to $age ...
 			mirtk register \
 				-image atlas/templates/t2w/t$age.00.nii.gz \
 				-image $brain \
-				-dofout dofs/$code-t$age.dof \
+				-dofout $out/$code-t$age.dof \
 				-model $model \
 				-v 0 
 		fi
