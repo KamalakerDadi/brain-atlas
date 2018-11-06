@@ -20,9 +20,19 @@ kings = "#{vol}/dhcp-reconstructed-images/UpdatedReconstructions/Reconstructions
 # struct pipeline automated QC output
 struct = "#{vol}/dhcp-derived-data/derived_02Jun2018/QC_reports/reports/image_QC_measures.csv"
 
+# Matteo's blacklist ... severe failures reported in 
+# neoDmri_incFindings.pdf, email of 31 oct 18
+matteo_blacklist = [
+  "sub-CC00605XX11_ses-172700",
+  "sub-CC00605XX11_ses-187700",
+  "sub-CC00689XX22_ses-199800",
+  "sub-CC00894XX21_ses-3020",
+  "sub-CC00578AN18_ses-164900"
+]
+
 # all the names we load
 names = [:antonis1, :antonis2, :antonis3, :kingsT1, :kingsT2, 
-         :structT1, :structT2]
+         :structT1, :structT2, :matteo]
 
 log "loading Antonis manual QC ..."
 
@@ -85,6 +95,11 @@ CSV::foreach(struct) do |row|
   scores["sub-#{subject}_ses-#{session}"][:"struct#{tN}"] = exists == "True"
 end
 
+log "tagging matteo's blacklisted scans ..."
+scores.each_pair do |key, value|
+  value[:matteo] = !matteo_blacklist.include?(key)
+end
+
 def median(array)
   sorted = array.sort
   len = sorted.length
@@ -104,9 +119,12 @@ def get_antonis(value)
   end
 end
 
+# reject if 
+#     on matteo blacklist
+#  OR struct pipeline has not run
 # accept if:
 #     median antonis score >= 3
-#  OR if not antonis available, then
+#  OR if antonis not available, then
 #     kingsT1 and kingsT2 pass
 #
 # look for strange scans: 
@@ -116,12 +134,19 @@ struct_should_fail_but_passes = []
 struct_should_pass_but_fails = []
 n_accept = 0
 scores.each_pair do |key, value|
-  antonis = get_antonis(value)
-  if antonis > 0
-    accept = antonis >= 3
+  if !value[:matteo]
+    accept = false
+  elsif !value[:structT1] || !value[:structT2]
+    accept = false
   else
-    accept = value.key?(:kingsT1) && value.key?(:kingsT2)
+    antonis = get_antonis(value)
+    if antonis > 0
+      accept = antonis >= 3
+    else
+      accept = value[:kingsT1] && value[:kingsT2]
+    end
   end
+
   value[:accept] = accept
   n_accept += 1 if accept
 

@@ -105,5 +105,3 @@ Build the atlas:
 ```
 $ mirtk construct-atlas john-adaptive-sigma_1.00-nmi.json
 ```
-
-
