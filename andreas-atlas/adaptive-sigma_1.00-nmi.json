@@ -1,16 +1,16 @@
 {
     "paths": {
-        "topdir": ".",
-        "agecsv": "inputs/config/ages.csv",
-        "imgcsv": "inputs/config/subjects.csv",
-        "tmpdir": "output/dhcp-w29-35-adaptive-sigma_1.00-nmi/cache",
-        "outdir": "output/dhcp-w29-35-adaptive-sigma_1.00-nmi/atlas"
+        "topdir": "..",
+        "agecsv": "config/ages.csv",
+        "imgcsv": "config/subjects.csv",
+        "tmpdir": "output/dhcp-n275-t36_44-adaptive-sigma_1.00-nmi/cache",
+        "outdir": "output/dhcp-n275-t36_44-adaptive-sigma_1.00-nmi/atlas"
     },
     "images": {
         "default": "t2w",
-        "ref": "inputs/global/roi/domain.nii.gz",
+        "ref": "global/roi/domain.nii.gz",
         "t1w": {
-            "prefix": "inputs/images/t1w/",
+            "prefix": "images/t1w/",
             "suffix": ".nii.gz",
             "interp": "linear",
             "datatype": "float",
@@ -21,7 +21,7 @@
             "bins": 0
         },
         "t2w": {
-            "prefix": "inputs/images/t2w/",
+            "prefix": "images/t2w/",
             "suffix": ".nii.gz",
             "interp": "linear",
             "datatype": "float",
@@ -32,13 +32,13 @@
             "bins": 0
         },
         "tissues": {
-            "prefix": "inputs/labels/tissues/",
+            "prefix": "labels/tissues/",
             "suffix": ".nii.gz",
             "labels": "1..9",
             "interp": "nn"
         },
         "structures": {
-            "prefix": "inputs/labels/structures/",
+            "prefix": "labels/structures/",
             "suffix": ".nii.gz",
             "labels": "1..87",
             "interp": "nn"
@@ -47,7 +47,7 @@
     "iterations": 8,
     "registration": {
         "affine": {
-            "prefix": "inputs/global/dof/",
+            "prefix": "global/dof/",
             "suffix": ".dof.gz"
         },
         "config": [
@@ -103,8 +103,8 @@
         }
     },
     "regression": {
-        "means": [29, 30, 31, 32, 33, 34, 35],
-        "sigma": [2, 2, 2, 2, 2, 2, 2],
+        "means": [36, 37, 38, 39, 40, 41, 42, 43, 44],
+        "sigma": [1.64, 1.31, 1.0, 0.77, 0.64, 0.73, 0.86, 1.18, 1.5],
         "epsilon": 0.01,
         "precision": 2
     },
@@ -115,8 +115,8 @@
             "structures": ["entropy", "label-consistency"]
         },
         "rois": {
-            "global#brain": "{topdir}/inputs/global/roi/brain/t{t:02.0f}.nii.gz",
-            "global#tissue={l:d}": ["{topdir}/inputs/global/roi/t{t:02.0f}/tissue_{l:d}.nii.gz", "1..9"],
+            "global#brain": "{topdir}/global/roi/brain/t{t:02.0f}.nii.gz",
+            "global#tissue={l:d}": ["{topdir}/global/roi/t{t:02.0f}/tissue_{l:d}.nii.gz", "1..9"],
             "brain": "{subdir}/roi/brain/t{t:02.2f}.nii.gz",
             "structure={l:02d}": ["structures", "all"],
             "tissue={l:d}": ["tissues", "all"]
