@@ -21,7 +21,7 @@ FileUtils.mkdir_p dofs
 ages = "#{root}/inputs/config/ages.csv"
 
 # struct pipeline output
-images = "/home/john/vol/dhcp-derived-data/derived_02Jun2018/derivatives"
+images = "/vol/dhcp-derived-data/derived_02Jun2018/derivatives"
 
 # tmp area
 tmp = "#{root}/tmp"

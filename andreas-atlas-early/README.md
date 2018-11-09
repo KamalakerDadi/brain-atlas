@@ -5,6 +5,10 @@ See `../andreas-atlas` for Andreas' original atlas work.
 This version builds atlases for the early weeks where we have many fewer
 sample brains. 
 
+Login to a doc machine and clone this repo into your home area. It needs to
+be on a public path, such as
+`/homes/jcupitt/GIT/brain-atlas/andreas-atlas-early`.
+
 Link the server input and output directories here:
 
 ```

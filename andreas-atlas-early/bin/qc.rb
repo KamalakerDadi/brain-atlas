@@ -7,7 +7,7 @@ require 'csv'
 $: << File.dirname(__FILE__)
 require 'my-utils.rb'
 
-vol = "/home/john/vol"
+vol = "/vol"
 
 # Antonis' manual QC programme
 antonis1 = "#{vol}/medic01/users/am411/dhcp-v2.3/manual-QC-serena/image_score.csv"
@@ -193,7 +193,3 @@ scores.keys.sort.each do |key|
   print "\n"
 end
 
-
-
-
-  

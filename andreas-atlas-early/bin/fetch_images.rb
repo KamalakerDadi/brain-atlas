@@ -8,7 +8,7 @@ root = File.dirname(File.dirname(File.expand_path(__FILE__)));
 
 # we need images that the struct pipeline has run on, since we need tissue
 # and struct labels ... we must therefore read from
-base = "/home/john/vol/dhcp-derived-data/derived_02Jun2018"
+base = "/vol/dhcp-derived-data/derived_02Jun2018"
 
 FileUtils.mkdir_p "#{root}/inputs/images/t1w"
 FileUtils.mkdir_p "#{root}/inputs/images/t2w"

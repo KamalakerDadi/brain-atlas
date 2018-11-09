@@ -4,7 +4,7 @@ require 'csv'
 
 # we need images that the struct pipeline has run on, since we need tissue
 # labels ... we must therefore read from
-base = "/home/john/vol/dhcp-derived-data/derived_02Jun2018"
+base = "/vol/dhcp-derived-data/derived_02Jun2018"
 
 def err msg
   STDERR.puts msg 
