@@ -5,6 +5,108 @@ See `../andreas-atlas` for Andreas' original atlas work.
 This version builds atlases for the early weeks where we have many fewer
 sample brains. 
 
+# Before you start
+
+You need an up-to-date MIRTK install on a doc machine in a globally visible
+directory, such as `/homes/jcupitt/mirtk`. Put that area on your `PATH` by
+adding to your `.bashrc`:
+
+```
+export MIRTK_ROOT=/homes/jcupitt/mirtk
+
+export PATH="$MIRTK_ROOT/bin:$PATH"
+export LD_LIBRARY_PATH=$MIRTK_ROOT/lib:$LD_LIBRARY_PATH
+
+# completions for mirtk
+[ ! -f "$MIRTK_ROOT/share/mirtk/completion/bash/mirtk" ] ||
+  source "$MIRTK_ROOT/share/mirtk/completion/bash/mirtk"
+```
+
+The quota on the home dir is too small for this, so use a scratch area like
+`/data/jcupitt/GIT`for the build itself.
+
+```
+cd /data/jcupitt
+mkdir GIT
+cd GIT
+```
+
+Ubuntu 16.04 cmake is too old. Build!
+
+```
+git clone https://github.com/Kitware/CMake.git
+cd CMake
+./bootstrap --prefix=/homes/jcupitt/mirtk
+make
+make install
+```
+
+You may need to update `PATH` to see the new `cmake`.
+
+Next, ITK:
+
+```
+cd /data/jcupitt/GIT
+git clone https://github.com/InsightSoftwareConsortium/ITK.git
+cd ITK
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/homes/jcupitt/mirtk -DBUILD_EXAMPLES=OFF -DBUILD_SHARED_LIBS=ON -DBUILD_TESTING=OFF ..
+make
+make install
+```
+
+Now VTK:
+
+```
+cd /data/jcupitt/GIT
+git clone https://github.com/Kitware/VTK.git
+cd VTK
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/homes/jcupitt/mirtk ..
+make
+make install
+```
+
+Now Eigen:
+
+```
+cd /data/jcupitt
+wget http://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2
+tar xf 3.3.5.tar.bz2 
+cd eigen*
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/homes/jcupitt/mirtk ..
+make
+make install
+```
+
+And finally MIRTK:
+
+```
+cd /data/jcupitt/GIT
+git clone --recursive https://github.com/BioMedIA/MIRTK.git
+cd MIRTK
+git submodule update
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/homes/jcupitt/mirtk \
+    -DMODULE_Deformable=ON \
+    -DMODULE_DrawEM=ON \
+    -DMODULE_Mapping=ON \
+    -DMODULE_Scripting=ON \
+    -DWITH_VTK=ON \
+    -DWITH_TBB=ON \
+    -DWITH_Python=ON \
+    ..
+make
+make install
+```
+
+# This repo
+
 Login to a doc machine and clone this repo into your home area. It needs to
 be on a public path, such as
 `/homes/jcupitt/GIT/brain-atlas/andreas-atlas-early`.
