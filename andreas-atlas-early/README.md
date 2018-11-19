@@ -206,6 +206,12 @@ $ mkdir -p inputs/global/roi
 $ cp ../andreas-atlas/inputs/global/roi/domain.nii.gz inputs/global/roi
 ```
 
+Remove any old run (if you want to restart everything):
+
+```
+$ rm -rf output/dhcp-w29-35-adaptive-sigma_1.00-nmi
+```
+
 Build the atlas:
 
 ```

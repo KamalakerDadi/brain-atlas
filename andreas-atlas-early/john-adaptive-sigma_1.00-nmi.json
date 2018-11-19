@@ -134,7 +134,7 @@
             "requirements": [
                 "Arch == \"X86_64\"",
                 "OpSysShortName == \"Ubuntu\"",
-                "OpSysMajorVer >= 14",
+                "OpSysMajorVer >= 16",
                 "Machine != \"kronos.doc.ic.ac.uk\"",
                 "Machine != \"kasos.doc.ic.ac.uk\"",
                 "Machine != \"florizel.doc.ic.ac.uk\""
