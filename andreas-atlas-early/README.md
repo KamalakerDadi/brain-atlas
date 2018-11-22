@@ -217,3 +217,36 @@ Build the atlas:
 ```
 $ mirtk construct-atlas john-adaptive-sigma_1.00-nmi.json
 ```
+
+## Progress
+
+Currently fails at step 8 when run on Condor:
+
+```
+2018-Nov-19 19:22:29 INFO Creating final mean shape templates
+2018-Nov-19 19:22:29 INFO Deform images to discrete time points (step=8)
+2018-Nov-19 19:22:33 INFO Submitted batch 'defimgs' (id=106, #jobs=440, #tasks=1760)
+2018-Nov-19 19:23:36 WAIT 440 pending, 0 running, 0 suspended, 0 held, 0 completed
+2018-Nov-19 19:24:36 WAIT 78 pending, 255 running, 0 suspended, 0 held, 107 completed
+2018-Nov-19 19:25:30 WAIT 1 pending, 238 running, 0 suspended, 0 held, 201 completed
+2018-Nov-19 19:26:04 WAIT 0 pending, 39 running, 0 suspended, 0 held, 401 completed
+2018-Nov-19 19:26:34 WAIT 0 pending, 8 running, 0 suspended, 0 held, 432 completed
+2018-Nov-19 19:27:05 WAIT 0 pending, 4 running, 0 suspended, 0 held, 436 completed
+2018-Nov-19 19:27:35 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:28:05 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:28:35 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:29:06 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:29:36 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:30:06 WAIT 0 pending, 1 running, 0 suspended, 0 held, 439 completed
+2018-Nov-19 19:30:36 WAIT 0 pending, 0 running, 0 suspended, 0 held, 440 completed
+2018-Nov-19 19:31:32 DONE 292 succeeded, 148 failed
+Traceback (most recent call last):
+  File "/homes/jcupitt/mirtk/lib/tools/construct-atlas", line 147, in <module>
+    atlas.construct(start=args.start, niter=args.steps - args.start)
+  File "/homes/jcupitt/mirtk/lib/python/mirtk/atlas/spatiotemporal.py", line 1148, in construct
+    self.wait(job, interval=30, verbose=1)
+  File "/homes/jcupitt/mirtk/lib/python/mirtk/atlas/spatiotemporal.py", line 254, in wait
+    raise Exception("Not all HTCondor jobs finished successfully!")
+Exception: Not all HTCondor jobs finished successfully!
+Error: construct-atlas command returned non-zero exit status 1
+```
