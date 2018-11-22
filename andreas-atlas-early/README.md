@@ -212,6 +212,13 @@ Remove any old run (if you want to restart everything):
 $ rm -rf output/dhcp-w29-35-adaptive-sigma_1.00-nmi
 ```
 
+Ask for a loooong (1000 hour) timeout on your Kerberos token (jobs will
+start failing after a few hours without this):
+
+```
+$ kinit -l 1000h
+```
+
 Build the atlas:
 
 ```
