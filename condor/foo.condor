@@ -12,7 +12,7 @@
 universe        = vanilla
 
 # This defines the path of the executable we want to run.
-executable      = /bin/hostname
+executable      = myscript.sh $(Process)
 
 # This specifies where data sent to STDOUT by the executable should be
 # directed to.
@@ -44,4 +44,4 @@ request_memory		= 1024 MB
 
 # This specifies that the specification, as parsed up to this point, should be 
 # submitted 5 times.  (If the number is omitted, the number '1' is assumed.)
-queue 5
+queue 10
