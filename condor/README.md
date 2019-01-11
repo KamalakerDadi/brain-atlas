@@ -48,7 +48,5 @@ out/foo_condor-3.out
 out/foo_condor-4.out
 ```
 
-The results. The hostname of each of the machines that the job ran on.
-
-
-
+The results. Each job is given a `$(Process)` as an argument (a number in 0 -
+9), and processes that file in the `data/` directory.

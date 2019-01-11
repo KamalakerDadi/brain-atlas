@@ -12,7 +12,10 @@
 universe        = vanilla
 
 # This defines the path of the executable we want to run.
-executable      = myscript.sh $(Process)
+executable      = myscript.sh 
+
+# This specifies what commandline arguments should be passed to the executable.
+arguments       = $(Process) 
 
 # This specifies where data sent to STDOUT by the executable should be
 # directed to.
@@ -36,9 +39,6 @@ error           = log/foo_condor-$(Process).err
 # Condor can write a time-ordered log of events related to this job-set
 # to a file we specify.  This specifies where that file should be written.
 log             = log/foo_condor.log
-
-# This specifies what commandline arguments should be passed to the executable.
-arguments       =
 
 request_memory		= 1024 MB
 
