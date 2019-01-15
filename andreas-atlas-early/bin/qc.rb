@@ -7,7 +7,7 @@ require 'csv'
 $: << File.dirname(__FILE__)
 require 'my-utils.rb'
 
-vol = "/vol"
+vol = "/home/john/vol"
 
 # Antonis' manual QC programme
 antonis1 = "#{vol}/medic01/users/am411/dhcp-v2.3/manual-QC-serena/image_score.csv"
@@ -20,6 +20,9 @@ kings = "#{vol}/dhcp-reconstructed-images/UpdatedReconstructions/Reconstructions
 # struct pipeline automated QC output
 struct = "#{vol}/dhcp-derived-data/derived_02Jun2018/QC_reports/reports/image_QC_measures.csv"
 
+# struct pipeline of 02 June has run
+struct_pipeline_dir = "#{vol}/dhcp-derived-data/derived_02Jun2018"
+
 # Matteo's blacklist ... severe failures reported in 
 # neoDmri_incFindings.pdf, email of 31 oct 18
 matteo_blacklist = [
@@ -30,9 +33,15 @@ matteo_blacklist = [
   "sub-CC00578AN18_ses-164900"
 ]
 
-# all the names we load
-names = [:antonis1, :antonis2, :antonis3, :kingsT1, :kingsT2, 
-         :structT1, :structT2, :matteo]
+# the QC sheet from Matteo's google docs spreadsheet as a CSV
+matteo_qc = "/home/john/GIT/brain-atlas/andreas-atlas-early/bin/matteo-10dec18.csv"
+
+# sean's QC 
+sean_qc = "/home/john/GIT/brain-atlas/andreas-atlas-early/bin/sean-17dec18-fmri_qc.csv"
+
+# all the names we display
+names = [:antonis1, :antonis2, :antonis3, 
+         :matteo, :matteo_qc, :sean_qc, :has_struct]
 
 log "loading Antonis manual QC ..."
 
@@ -84,7 +93,6 @@ CSV::foreach(kings) do |row|
 end
 
 log "loading struct pipeline QC ..."
-
 CSV::foreach(struct) do |row|
   next if not row[0] =~ /(CC\d\d\d\d\d\w\w\d\d)/
   subject = row[0]
@@ -96,8 +104,48 @@ CSV::foreach(struct) do |row|
 end
 
 log "tagging matteo's blacklisted scans ..."
-scores.each_pair do |key, value|
-  value[:matteo] = !matteo_blacklist.include?(key)
+matteo_blacklist.each do |key|
+  scores[key][:matteo] = false
+end
+
+log "loading matteo's QC ..."
+CSV::foreach(matteo_qc) do |row|
+  next if not row[1] =~ /(CC\d\d\d\d\d\w\w\d\d)/
+  next if row[2] == "na"
+  subject = row[1]
+  session = row[2]
+  pass = row[6].to_i == 1
+  scores["sub-#{subject}_ses-#{session}"][:matteo_qc] = pass
+end
+
+log "loading sean's QC ..."
+CSV::foreach(sean_qc) do |row|
+  next if not row[1] =~ /(CC\d\d\d\d\d\w\w\d\d)/
+  subject = row[1]
+  session = row[2]
+  pass = row[10] != "True"
+  scores["sub-#{subject}_ses-#{session}"][:sean_qc] = pass
+end
+
+log "finding images in struct output with at least T2 ..."
+CSV::foreach(struct_pipeline_dir + "/participants.tsv", col_sep: " ") do |row|
+  next if not row[0] =~ /(CC\d\d\d\d\d\w\w\d\d)/
+  subject = row[0]
+  subject_dir = struct_pipeline_dir + "/derivatives/sub-#{subject}"
+  next if !File.exists?(subject_dir)
+
+  # look for the subdir and get the session ids
+  CSV::foreach(subject_dir + "/sub-#{subject}_sessions.tsv", 
+    col_sep: " ") do |row|
+    next if row[0] == "session_id"
+    session = row[0]
+
+    session_dir = subject_dir + "/ses-#{session}"
+    if File.exists?(session_dir + 
+      "/anat/sub-#{subject}_ses-#{session}_T2w.nii.gz")
+      scores["sub-#{subject}_ses-#{session}"][:has_struct] = true
+    end
+  end
 end
 
 def median(array)
@@ -119,67 +167,48 @@ def get_antonis(value)
   end
 end
 
-# reject if 
-#     on matteo blacklist
-#  OR struct pipeline has not run
-# accept if:
-#     median antonis score >= 3
-#  OR if antonis not available, then
-#     kingsT1 and kingsT2 pass
-#
-# look for strange scans: 
-#   - accept, but struct pipeline fails
-#   - don't accept, struct pipeline passes
-struct_should_fail_but_passes = []
-struct_should_pass_but_fails = []
+# have a set of tests that can each be:
+#   true - we think this scan is OK
+#   false - we think it's bad
+#   nil - no information
+# then, ignoring all nil values, we want all tests to AND true to accept
+
 n_accept = 0
 scores.each_pair do |key, value|
-  if !value[:matteo]
-    accept = false
-  elsif !value[:structT1] || !value[:structT2]
-    accept = false
-  else
-    antonis = get_antonis(value)
-    if antonis > 0
-      accept = antonis >= 3
+  matteo_test = value[:matteo]
+  matteo_qc_test = value[:matteo_qc] == true
+  sean_qc_test = value[:sean_qc]  == true
+  has_struct_test = value[:has_struct] 
+
+  antonis_test = nil
+  antonis_score = get_antonis(value) 
+  if antonis_score != 0
+    antonis_test = antonis_score >= 2
+  end
+
+  # set of criteria we test
+  accept = [matteo_test, matteo_qc_test, sean_qc_test, has_struct_test, 
+            antonis_test].reduce do |a, b|
+    # like AND, but ignore nil values
+    if a.nil?
+      b
+    elsif b.nil?
+      a
     else
-      accept = value[:kingsT1] && value[:kingsT2]
+      a && b
     end
   end
 
-  value[:accept] = accept
-  n_accept += 1 if accept
-
-  if accept && (!value.key?(:structT1) || !value.key?(:structT2))
-    value[:should_pass_but_fails] = true
-    struct_should_pass_but_fails << key
-  end
-
-  if !accept && (value.key?(:structT1) && value.key?(:structT2))
-    value[:should_fail_but_passes] = true
-    struct_should_fail_but_passes << key
+  if ! accept.nil?
+    value[:accept] = accept
+    n_accept += 1 if accept
   end
 
 end
 
+puts "#{scores.count} scans"
 puts "#{n_accept} scans accepted"
 puts "#{scores.count - n_accept} scans rejected"
-
-puts "should fail but pass struct pipeline:"
-struct_should_fail_but_passes.sort.each do |x|
-  x =~ /sub-(.*)_ses-(.*)/
-  subject = $~[1]
-  session = $~[2]
-  puts "#{subject}-#{session}"
-end
-
-puts "should pass but fail struct pipeline:"
-struct_should_pass_but_fails.sort.each do |x|
-  x =~ /sub-(.*)_ses-(.*)/
-  subject = $~[1]
-  session = $~[2]
-  puts "#{subject}-#{session}"
-end
 
 puts "subject,session,accept,#{names.join(',')}"
 scores.keys.sort.each do |key|
