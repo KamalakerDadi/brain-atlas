@@ -1,0 +1,230 @@
+01/15/19 17:37:51 ******************************************************
+01/15/19 17:37:51 ** condor_scheduniv_exec.154.0 (CONDOR_DAGMAN) STARTING UP
+01/15/19 17:37:51 ** /vol/condor/releases/8.6.9/condor-8.6.9-x86_64_Ubuntu16-stripped/bin/condor_dagman
+01/15/19 17:37:51 ** SubsystemInfo: name=DAGMAN type=DAGMAN(10) class=DAEMON(1)
+01/15/19 17:37:51 ** Configuration: subsystem:DAGMAN local:<NONE> class:DAEMON
+01/15/19 17:37:51 ** $CondorVersion: 8.6.9 Jan 03 2018 BuildID: 428149 $
+01/15/19 17:37:51 ** $CondorPlatform: x86_64_Ubuntu16 $
+01/15/19 17:37:51 ** PID = 4679
+01/15/19 17:37:51 ** Log last touched time unavailable (No such file or directory)
+01/15/19 17:37:51 ******************************************************
+01/15/19 17:37:51 Using config source: /etc/condor/condor_config
+01/15/19 17:37:51 Using local config sources: 
+01/15/19 17:37:51    /etc/condor/condor_config.d/class-03-CLIENT
+01/15/19 17:37:51    /etc/condor/condor_config.d/distribution.conf
+01/15/19 17:37:51 config Macros = 210, Sorted = 210, StringBytes = 6308, TablesBytes = 7616
+01/15/19 17:37:51 CLASSAD_CACHING is ENABLED
+01/15/19 17:37:51 Daemon Log is logging: D_ALWAYS D_ERROR
+01/15/19 17:37:51 DaemonCore: No command port requested.
+01/15/19 17:37:51 DAGMAN_USE_STRICT setting: 1
+01/15/19 17:37:51 DAGMAN_VERBOSITY setting: 3
+01/15/19 17:37:51 DAGMAN_DEBUG_CACHE_SIZE setting: 5242880
+01/15/19 17:37:51 DAGMAN_DEBUG_CACHE_ENABLE setting: False
+01/15/19 17:37:51 DAGMAN_SUBMIT_DELAY setting: 0
+01/15/19 17:37:51 DAGMAN_MAX_SUBMIT_ATTEMPTS setting: 6
+01/15/19 17:37:51 DAGMAN_STARTUP_CYCLE_DETECT setting: False
+01/15/19 17:37:51 DAGMAN_MAX_SUBMITS_PER_INTERVAL setting: 5
+01/15/19 17:37:51 DAGMAN_USER_LOG_SCAN_INTERVAL setting: 5
+01/15/19 17:37:51 DAGMAN_DEFAULT_PRIORITY setting: 0
+01/15/19 17:37:51 DAGMAN_SUPPRESS_NOTIFICATION setting: True
+01/15/19 17:37:51 allow_events (DAGMAN_ALLOW_EVENTS) setting: 114
+01/15/19 17:37:51 DAGMAN_RETRY_SUBMIT_FIRST setting: True
+01/15/19 17:37:51 DAGMAN_RETRY_NODE_FIRST setting: False
+01/15/19 17:37:51 DAGMAN_MAX_JOBS_IDLE setting: 1000
+01/15/19 17:37:51 DAGMAN_MAX_JOBS_SUBMITTED setting: 0
+01/15/19 17:37:51 DAGMAN_MAX_PRE_SCRIPTS setting: 20
+01/15/19 17:37:51 DAGMAN_MAX_POST_SCRIPTS setting: 20
+01/15/19 17:37:51 DAGMAN_MUNGE_NODE_NAMES setting: True
+01/15/19 17:37:51 DAGMAN_PROHIBIT_MULTI_JOBS setting: False
+01/15/19 17:37:51 DAGMAN_SUBMIT_DEPTH_FIRST setting: False
+01/15/19 17:37:51 DAGMAN_ALWAYS_RUN_POST setting: False
+01/15/19 17:37:51 DAGMAN_ABORT_DUPLICATES setting: True
+01/15/19 17:37:51 DAGMAN_ABORT_ON_SCARY_SUBMIT setting: True
+01/15/19 17:37:51 DAGMAN_PENDING_REPORT_INTERVAL setting: 600
+01/15/19 17:37:51 DAGMAN_AUTO_RESCUE setting: True
+01/15/19 17:37:51 DAGMAN_MAX_RESCUE_NUM setting: 100
+01/15/19 17:37:51 DAGMAN_WRITE_PARTIAL_RESCUE setting: True
+01/15/19 17:37:51 DAGMAN_DEFAULT_NODE_LOG setting: @(DAG_DIR)/@(DAG_FILE).nodes.log
+01/15/19 17:37:51 DAGMAN_GENERATE_SUBDAG_SUBMITS setting: True
+01/15/19 17:37:51 DAGMAN_MAX_JOB_HOLDS setting: 100
+01/15/19 17:37:51 DAGMAN_HOLD_CLAIM_TIME setting: 20
+01/15/19 17:37:51 ALL_DEBUG setting: 
+01/15/19 17:37:51 DAGMAN_DEBUG setting: 
+01/15/19 17:37:51 DAGMAN_SUPPRESS_JOB_LOGS setting: False
+01/15/19 17:37:51 DAGMAN_REMOVE_NODE_JOBS setting: True
+01/15/19 17:37:51 argv[0] == "condor_scheduniv_exec.154.0"
+01/15/19 17:37:51 argv[1] == "-Lockfile"
+01/15/19 17:37:51 argv[2] == "diamond.dag.lock"
+01/15/19 17:37:51 argv[3] == "-AutoRescue"
+01/15/19 17:37:51 argv[4] == "1"
+01/15/19 17:37:51 argv[5] == "-DoRescueFrom"
+01/15/19 17:37:51 argv[6] == "0"
+01/15/19 17:37:51 argv[7] == "-Dag"
+01/15/19 17:37:51 argv[8] == "diamond.dag"
+01/15/19 17:37:51 argv[9] == "-Suppress_notification"
+01/15/19 17:37:51 argv[10] == "-CsdVersion"
+01/15/19 17:37:51 argv[11] == "$CondorVersion: 8.6.9 Jan 03 2018 BuildID: 428149 $"
+01/15/19 17:37:51 argv[12] == "-Dagman"
+01/15/19 17:37:51 argv[13] == "/usr/local/condor/release/bin/condor_dagman"
+01/15/19 17:37:51 argv[14] == "-Outfile_dir"
+01/15/19 17:37:51 argv[15] == "out"
+01/15/19 17:37:51 AUTH_ERROR: Permission denied
+01/15/19 17:37:51 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:51 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:37:51 AUTH_ERROR: Permission denied
+01/15/19 17:37:51 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:51 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:37:51 AUTH_ERROR: Permission denied
+01/15/19 17:37:51 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:51 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:37:51 AUTH_ERROR: Permission denied
+01/15/19 17:37:51 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:51 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:37:51 DAGMAN_LOG_ON_NFS_IS_ERROR setting: False
+01/15/19 17:37:51 Default node log file is: </homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log>
+01/15/19 17:37:51 DAG Lockfile will be written to diamond.dag.lock
+01/15/19 17:37:51 DAG Input file is diamond.dag
+01/15/19 17:37:51 Parsing 1 dagfiles
+01/15/19 17:37:51 Parsing diamond.dag ...
+01/15/19 17:37:51 Dag contains 4 total jobs
+01/15/19 17:37:51 Sleeping for 3 seconds to ensure ProcessId uniqueness
+01/15/19 17:37:54 Bootstrapping...
+01/15/19 17:37:54 Number of pre-completed nodes: 0
+01/15/19 17:37:54 MultiLogFiles: truncating log file /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:37:54 DAG status: 0 (DAG_STATUS_OK)
+01/15/19 17:37:54 Of 4 nodes total:
+01/15/19 17:37:54  Done     Pre   Queued    Post   Ready   Un-Ready   Failed
+01/15/19 17:37:54   ===     ===      ===     ===     ===        ===      ===
+01/15/19 17:37:54     0       0        0       0       1          3        0
+01/15/19 17:37:54 0 job proc(s) currently held
+01/15/19 17:37:54 AUTH_ERROR: Permission denied
+01/15/19 17:37:54 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:54 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:37:54 Registering condor_event_timer...
+01/15/19 17:37:55 Submitting HTCondor Node A job(s)...
+01/15/19 17:37:55 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:37:55 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:37:55 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:37:55 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:37:55 From submit: 
+01/15/19 17:37:55 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:37:55 failed while reading from pipe.
+01/15/19 17:37:55 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:37:55 ERROR: submit attempt failed
+01/15/19 17:37:55 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:37:55 Job submit try 1/6 failed, will try again in >= 1 second.
+01/15/19 17:37:55 DAG status: 0 (DAG_STATUS_OK)
+01/15/19 17:37:55 Of 4 nodes total:
+01/15/19 17:37:55  Done     Pre   Queued    Post   Ready   Un-Ready   Failed
+01/15/19 17:37:55   ===     ===      ===     ===     ===        ===      ===
+01/15/19 17:37:55     0       0        0       0       1          3        0
+01/15/19 17:37:55 0 job proc(s) currently held
+01/15/19 17:37:55 AUTH_ERROR: Permission denied
+01/15/19 17:37:55 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:37:55 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:38:00 Submitting HTCondor Node A job(s)...
+01/15/19 17:38:00 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:38:00 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:38:00 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:38:00 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:00 From submit: 
+01/15/19 17:38:00 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:00 failed while reading from pipe.
+01/15/19 17:38:00 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:00 ERROR: submit attempt failed
+01/15/19 17:38:00 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:00 Job submit try 2/6 failed, will try again in >= 2 seconds.
+01/15/19 17:38:05 Submitting HTCondor Node A job(s)...
+01/15/19 17:38:05 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:38:05 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:38:05 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:38:05 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:05 From submit: 
+01/15/19 17:38:05 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:05 failed while reading from pipe.
+01/15/19 17:38:05 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:05 ERROR: submit attempt failed
+01/15/19 17:38:05 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:05 Job submit try 3/6 failed, will try again in >= 4 seconds.
+01/15/19 17:38:10 Submitting HTCondor Node A job(s)...
+01/15/19 17:38:10 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:38:10 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:38:10 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:38:10 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:10 From submit: 
+01/15/19 17:38:10 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:10 failed while reading from pipe.
+01/15/19 17:38:10 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:10 ERROR: submit attempt failed
+01/15/19 17:38:10 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:10 Job submit try 4/6 failed, will try again in >= 8 seconds.
+01/15/19 17:38:21 Submitting HTCondor Node A job(s)...
+01/15/19 17:38:21 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:38:21 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:38:21 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:38:21 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:21 From submit: 
+01/15/19 17:38:21 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:21 failed while reading from pipe.
+01/15/19 17:38:21 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:21 ERROR: submit attempt failed
+01/15/19 17:38:21 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:21 Job submit try 5/6 failed, will try again in >= 16 seconds.
+01/15/19 17:38:38 Submitting HTCondor Node A job(s)...
+01/15/19 17:38:38 Adding a DAGMan workflow log /homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log
+01/15/19 17:38:38 Masking the events recorded in the DAGMAN workflow log
+01/15/19 17:38:38 Mask for workflow log is 0,1,2,4,5,7,9,10,11,12,13,16,17,24,27
+01/15/19 17:38:38 submitting: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:38 From submit: 
+01/15/19 17:38:38 From submit: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:38 failed while reading from pipe.
+01/15/19 17:38:38 Read so far: ERROR: Failed to open command file (No such file or directory)
+01/15/19 17:38:38 ERROR: submit attempt failed
+01/15/19 17:38:38 submit command was: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_submit -a dag_node_name' '=' 'A -a +DAGManJobId' '=' '154 -a DAGManJobId' '=' '154 -a submit_event_notes' '=' 'DAG' 'Node:' 'A -a dagman_log' '=' '/homes/jcupitt/GIT/brain-atlas/dagman/./diamond.dag.nodes.log -a +DAGManNodesMask' '=' '"0,1,2,4,5,7,9,10,11,12,13,16,17,24,27" -a DAG_STATUS' '=' '0 -a FAILED_COUNT' '=' '0 -a +KeepClaimIdle' '=' '20 -a notification' '=' 'never -a +DAGParentNodeNames' '=' '"" diamond.condor
+01/15/19 17:38:38 Job submit failed after 6 tries.
+01/15/19 17:38:38 Shortcutting node A retries because of submit failure(s)
+01/15/19 17:38:38 DAG status: 2 (DAG_STATUS_NODE_FAILED)
+01/15/19 17:38:38 Of 4 nodes total:
+01/15/19 17:38:38  Done     Pre   Queued    Post   Ready   Un-Ready   Failed
+01/15/19 17:38:38   ===     ===      ===     ===     ===        ===      ===
+01/15/19 17:38:38     0       0        0       0       0          3        1
+01/15/19 17:38:38 0 job proc(s) currently held
+01/15/19 17:38:38 AUTH_ERROR: Permission denied
+01/15/19 17:38:38 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:38:38 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:38:38 ERROR: the following job(s) failed:
+01/15/19 17:38:38 ---------------------- Job ----------------------
+01/15/19 17:38:38       Node Name: A
+01/15/19 17:38:38            Noop: false
+01/15/19 17:38:38          NodeID: 0
+01/15/19 17:38:38     Node Status: STATUS_ERROR    
+01/15/19 17:38:38 Node return val: -1
+01/15/19 17:38:38           Error: Job submit failed
+01/15/19 17:38:38 Job Submit File: diamond.condor
+01/15/19 17:38:38  HTCondor Job ID: [not yet submitted]
+01/15/19 17:38:38       Q_PARENTS: <END>
+01/15/19 17:38:38       Q_WAITING: <END>
+01/15/19 17:38:38      Q_CHILDREN: B, C, <END>
+01/15/19 17:38:38 ---------------------------------------	<END>
+01/15/19 17:38:38 Aborting DAG...
+01/15/19 17:38:38 Writing Rescue DAG to diamond.dag.rescue001...
+01/15/19 17:38:38 Removing submitted jobs...
+01/15/19 17:38:38 Removing any/all submitted HTCondor jobs...
+01/15/19 17:38:38 Running: /vol/condor/pool/doc/release/Ubuntu-16.04/X86_64.LINUX//bin/condor_rm -const DAGManJobId' '=?=' '154
+01/15/19 17:38:38 Note: 0 total job deferrals because of -MaxJobs limit (0)
+01/15/19 17:38:38 Note: 0 total job deferrals because of -MaxIdle limit (1000)
+01/15/19 17:38:38 Note: 0 total job deferrals because of node category throttles
+01/15/19 17:38:38 Note: 0 total PRE script deferrals because of -MaxPre limit (20) or DEFER
+01/15/19 17:38:38 Note: 0 total POST script deferrals because of -MaxPost limit (20) or DEFER
+01/15/19 17:38:38 DAG status: 2 (DAG_STATUS_NODE_FAILED)
+01/15/19 17:38:38 Of 4 nodes total:
+01/15/19 17:38:38  Done     Pre   Queued    Post   Ready   Un-Ready   Failed
+01/15/19 17:38:38   ===     ===      ===     ===     ===        ===      ===
+01/15/19 17:38:38     0       0        0       0       0          3        1
+01/15/19 17:38:38 0 job proc(s) currently held
+01/15/19 17:38:38 AUTH_ERROR: Permission denied
+01/15/19 17:38:38 SECMAN: required authentication with schedd at <146.169.26.174:9618> failed, so aborting command QMGMT_WRITE_CMD.
+01/15/19 17:38:38 WARNING: failed to connect to queue manager (AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using KERBEROS)
+01/15/19 17:38:38 Wrote metrics file diamond.dag.metrics.
+01/15/19 17:38:38 Metrics not sent because of PEGASUS_METRICS or CONDOR_DEVELOPERS setting.
+01/15/19 17:38:38 **** condor_scheduniv_exec.154.0 (condor_DAGMAN) pid 4679 EXITING WITH STATUS 1

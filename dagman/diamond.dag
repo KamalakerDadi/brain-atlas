@@ -1,0 +1,8 @@
+# File name: diamond.dag  
+
+JOB  A  diamond.condor  
+JOB  B  diamond.condor  
+JOB  C  diamond.condor  
+JOB  D  diamond.condor  
+PARENT A CHILD B C  
+PARENT B C CHILD D 

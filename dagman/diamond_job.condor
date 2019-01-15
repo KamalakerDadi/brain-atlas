@@ -1,0 +1,7 @@
+executable   = diamond.sh
+output       = diamond.out.$(cluster)  
+error        = diamond.err.$(cluster)  
+log          = diamond_condor.log  
+universe     = vanilla  
+arguments    = $$([DAGParentNodeNames]) 
+queue
