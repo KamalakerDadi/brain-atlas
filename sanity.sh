@@ -189,6 +189,14 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
       scan_date=
     fi
 
+    if [ x"$session" == x"0" ]; then
+      err "$subject" "has a 0 session id in sessions.tsv"
+    fi
+
+    if ! [[ $session =~ ^[0-9]+$ ]]; then
+      err "$subject" "bad session id $session"
+    fi
+
     if ! [ -d "$derivatives_dir/sub-$subject/ses-$session" ]; then
       err "$subject-$session" "listed in sessions.tsv, but dir does not exist"
     fi
