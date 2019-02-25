@@ -113,6 +113,19 @@ subjects.each do |subject_id|
       subject_err "#{subject_id}-#{session_id}", "bad age at scan"
     end
 
+    if age_at_scan.to_f < 10 || age_at_scan.to_f > 50
+      subject_err "#{subject_id}-#{session_id}", "age at scan out of range"
+    end
+
+    age_at_birth = session["baby_ga_at_birth_weeks"]
+    if age_at_birth !~ /\d+(\.\d+)?/
+      subject_err "#{subject_id}-#{session_id}", "bad age at birth"
+    end
+
+    if age_at_birth.to_f < 10 || age_at_birth.to_f > 50
+      subject_err "#{subject_id}-#{session_id}", "age at birth out of range"
+    end
+
     gender = session["baby_gender"]
     if gender !~ /[MF]/
       subject_err "#{subject_id}-#{session_id}", "bad gender"
