@@ -19,7 +19,8 @@ every session has some data, and that the data looks OK.
 ```
 
 Expect to see some `"in JSON but no dir"` errors for subjects where one of the
-two or more scans failed the struct pipeline.
+two or more scans failed the struct pipeline, or where one or more scans took
+place after 02 June, or where one or more scans were not neonates.
 
 Expect to see `"bad scan_validation"` for scans which were not validated but
 passed struct. For example, the fetal trial scans.
