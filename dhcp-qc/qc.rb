@@ -37,11 +37,13 @@ matteo_blacklist = [
 matteo_qc = "/home/john/GIT/brain-atlas/andreas-atlas-early/bin/matteo-10dec18.csv"
 
 # sean's QC 
-sean_qc = "/home/john/GIT/brain-atlas/andreas-atlas-early/bin/sean-17dec18-fmri_qc.csv"
+sean_qc = "/home/john/GIT/brain-atlas/andreas-atlas-early/bin/sean-18jan19-fmri_qc.csv"
 
 # all the names we display
-names = [:antonis1, :antonis2, :antonis3, 
-         :matteo, :matteo_qc, :sean_qc, :has_struct]
+names = [:antonis1, :antonis2, :antonis3, :antonis, 
+         :has_struct,
+         :matteo, :matteo_qc, 
+         :sean_qc]
 
 log "loading Antonis manual QC ..."
 
@@ -71,6 +73,34 @@ CSV::foreach(antonis3) do |row|
   session = $~[2]
 
   scores["sub-#{subject}_ses-#{session}"][:antonis3] = row[1].to_i
+end
+
+def median(array)
+  sorted = array.sort
+  len = sorted.length
+  (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+end
+
+# calculate median antonis for a row ... 0 for unknown
+def get_antonis(value)
+  values = []
+  [:antonis1, :antonis2, :antonis3].each do |antonis|
+    values << value[antonis] if value.key? antonis
+  end
+  
+  if values.length == 0 
+    return 0
+  else
+    median values
+  end
+end
+
+scores.each_pair do |key, value|
+  antonis_score = get_antonis(value) 
+
+  if antonis_score != 0
+    scores[key][:antonis] = antonis_score >= 2
+  end
 end
 
 log "loading King's QC ..."
@@ -109,6 +139,7 @@ matteo_blacklist.each do |key|
 end
 
 log "loading matteo's QC ..."
+n_matteo = 0
 CSV::foreach(matteo_qc) do |row|
   next if not row[1] =~ /(CC\d\d\d\d\d\w\w\d\d)/
   next if row[2] == "na"
@@ -116,87 +147,96 @@ CSV::foreach(matteo_qc) do |row|
   session = row[2]
   pass = row[6].to_i == 1
   scores["sub-#{subject}_ses-#{session}"][:matteo_qc] = pass
+  n_matteo += 1
 end
+puts "#{n_matteo} matteo successes"
 
 log "loading sean's QC ..."
+n_sean = 0
 CSV::foreach(sean_qc) do |row|
   next if not row[1] =~ /(CC\d\d\d\d\d\w\w\d\d)/
   subject = row[1]
   session = row[2]
   pass = row[10] != "True"
   scores["sub-#{subject}_ses-#{session}"][:sean_qc] = pass
+  n_sean += 1
 end
+puts "#{n_sean} sean successes"
+
+# This went of part.tsv ... instead, just for now, work from the dir struct
+# log "finding images in struct output with at least T2 ..."
+# CSV::foreach(struct_pipeline_dir + "/participants.tsv", col_sep: " ") do |row|
+#   next if not row[0] =~ /(CC\d\d\d\d\d\w\w\d\d)/
+#   subject = row[0]
+#   subject_dir = struct_pipeline_dir + "/derivatives/sub-#{subject}"
+#   next if !File.exists?(subject_dir)
+# 
+#   # look for the subdir and get the session ids
+#   CSV::foreach(subject_dir + "/sub-#{subject}_sessions.tsv", 
+#     col_sep: " ") do |row|
+#     next if row[0] == "session_id"
+#     session = row[0]
+# 
+#     session_dir = subject_dir + "/ses-#{session}"
+#     if File.exists?(session_dir + 
+#       "/anat/sub-#{subject}_ses-#{session}_T2w.nii.gz")
+#       scores["sub-#{subject}_ses-#{session}"][:has_struct] = true
+#     end
+#   end
+# end
 
 log "finding images in struct output with at least T2 ..."
-CSV::foreach(struct_pipeline_dir + "/participants.tsv", col_sep: " ") do |row|
-  next if not row[0] =~ /(CC\d\d\d\d\d\w\w\d\d)/
-  subject = row[0]
-  subject_dir = struct_pipeline_dir + "/derivatives/sub-#{subject}"
-  next if !File.exists?(subject_dir)
+n_struct = 0
+Dir::glob("#{struct_pipeline_dir}/derivatives/sub-*") do |subject_dir|
+  next if subject_dir !~ /.*\/sub-(CC.*)/
+  subject = $~[1]
 
-  # look for the subdir and get the session ids
-  CSV::foreach(subject_dir + "/sub-#{subject}_sessions.tsv", 
-    col_sep: " ") do |row|
-    next if row[0] == "session_id"
-    session = row[0]
+  Dir::glob("#{subject_dir}/ses-*") do |session_dir|
+    next if session_dir !~ /.*\/ses-(.*)/
+    session = $~[1]
 
-    session_dir = subject_dir + "/ses-#{session}"
-    if File.exists?(session_dir + 
-      "/anat/sub-#{subject}_ses-#{session}_T2w.nii.gz")
-      scores["sub-#{subject}_ses-#{session}"][:has_struct] = true
+    t2_file = "#{session_dir}/anat/sub-#{subject}_ses-#{session}_T2w.nii.gz"
+    if !File.exists?(t2_file)
+      puts "#{session_dir} exists, but there's no T2!"
     end
-  end
-end
 
-def median(array)
-  sorted = array.sort
-  len = sorted.length
-  (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
-end
-
-def get_antonis(value)
-  values = []
-  [:antonis1, :antonis2, :antonis3].each do |antonis|
-    values << value[antonis] if value.key? antonis
-  end
-  
-  if values.length == 0 
-    return 0
-  else
-    median values
+    scores["sub-#{subject}_ses-#{session}"][:has_struct] = true
+    n_struct += 1
   end
 end
+puts "#{n_struct} struct pipeline successes"
 
 # have a set of tests that can each be:
 #   true - we think this scan is OK
 #   false - we think it's bad
 #   nil - no information
-# then, ignoring all nil values, we want all tests to AND true to accept
+# then, ignoring nil values, we want all tests to AND true to accept
 
 n_accept = 0
 scores.each_pair do |key, value|
   matteo_test = value[:matteo]
   matteo_qc_test = value[:matteo_qc] == true
-  sean_qc_test = value[:sean_qc]  == true
+  sean_qc_test = value[:sean_qc] == true
   has_struct_test = value[:has_struct] 
-
-  antonis_test = nil
-  antonis_score = get_antonis(value) 
-  if antonis_score != 0
-    antonis_test = antonis_score >= 2
-  end
+  antonis_test = value[:antonis] 
 
   # set of criteria we test
-  accept = [matteo_test, matteo_qc_test, sean_qc_test, has_struct_test, 
-            antonis_test].reduce do |a, b|
+  accept = [
+#            matteo_test, 
+            matteo_qc_test, 
+            sean_qc_test, 
+            has_struct_test, 
+            antonis_test
+           ].reduce do |a, b|
     # like AND, but ignore nil values
-    if a.nil?
-      b
-    elsif b.nil?
-      a
-    else
-      a && b
-    end
+#    if a.nil?
+#      b
+#    elsif b.nil?
+#      a
+#    else
+#      a && b
+#    end
+     a && b
   end
 
   if ! accept.nil?
