@@ -127,19 +127,10 @@ Pick out just the weeks you want:
 
 ```
 $ mkdir -p inputs/config
-$ ./bin/mkconfig.rb inputs/config/ages.csv participants_full.tsv 28 36 
+$ ./bin/mkconfig.rb participants_full.tsv 28 45 > inputs/config/ages.csv
 ```
 
 Make `inputs/config/subjects.csv` by dropping column two.
-
-Get all the QC and search for fails:
-
-```
-$ ./bin/qc.rb > x.csv
-```
-
-Look for the "should fail, but pass" section and copy those scan names into
-`inputs/config/blacklist.csv`.
 
 Get the source images:
 
