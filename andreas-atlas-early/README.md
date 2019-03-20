@@ -107,8 +107,8 @@ make install
 
 # This repo
 
-Login to a doc machine and clone this repo into your home area. It needs to
-be on a public path, such as
+Login to a doc machine and clone this repo into your
+home area. It needs to be on a public path, such as
 `/homes/jcupitt/GIT/brain-atlas/andreas-atlas-early`.
 
 Link the server input and output directories here:
@@ -120,14 +120,14 @@ $ ./bin/mklinks.sh
 Search the server and find all scans and scan ages.
 
 ```
-$ ./bin/mkparticipants_full.rb > participants_full.tsv
+$ ./bin/mkparticipants_full.rb 
 ```
 
 Pick out just the weeks you want:
 
 ```
 $ mkdir -p inputs/config
-$ ./bin/mkconfig.rb participants_full.tsv 29 36 > inputs/config/ages.csv
+$ ./bin/mkconfig.rb inputs/config/ages.csv participants_full.tsv 28 36 
 ```
 
 Make `inputs/config/subjects.csv` by dropping column two.

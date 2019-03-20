@@ -6,19 +6,42 @@ $options = {
   :fatal => true
 }
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options] "
+class ProgramArgs
+  def initialize(args)
+    @args = args
 
-  opts.on("-q", "--quiet", "Run quietly") do |v|
-    $options[:verbose] = false
+    @opt_parser = OptionParser.new do |opts|
+      opts.separator ""
+      opts.separator "Specific options:"
+
+      opts.on("-v", "--[no-]verbose", "Verbose output") do |value|
+        $options[:verbose] = value
+      end
+      opts.on("-f", "--[no-]fatal", "Stop on first error") do |value|
+        $options[:fatal] = value
+      end
+      opts.on("-o", "--out", "send output to OUT") do |value|
+        $options[:out] = value
+      end
+    end
   end
-  opts.on("-f", "--fatal", "Stop on first error") do |v|
-    $options[:fatal] = v
+
+  def on
+    @opt_parser.on
   end
-  opts.on("-o", "--out", "send output to OUT") do |v|
-    $options[:out] = v
+
+  def banner(title)
+    @opt_parser.banner = title
   end
-end.parse!
+
+  def to_s
+    @opt_parser.to_s
+  end
+
+  def parse!
+    @opt_parser.parse!(@args)
+  end
+end
 
 def log(msg)
   if $options[:verbose]
@@ -33,4 +56,5 @@ def err(msg)
     exit
   end
 end
+
 
